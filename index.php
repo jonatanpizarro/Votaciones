@@ -10,6 +10,7 @@
 		}
 	</style>
 	<title>Votaciones</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 
@@ -30,21 +31,16 @@ header("Location: inicio.php");
 if(isset($_POST["login"])){
 
  
-	/*$query = $pdo->prepare("select i, a FROM prova");
-  	$query->execute();
-  	$row = $query->fetch();
-  while ( $row ) {
-    echo $row['i']." - " . $row['a']. "<br/>";
-    $row = $query->fetch();*/
+	
   }
 	if(!empty($_POST['usuario']) && !empty($_POST['pass'])) {
-		 $username=$_POST['usuario'];
+		 $username=$_POST['usuario'];												//Asigna a las variables el post 
 		 $password=$_POST['pass']; 
 		 
-		$query =$pdo->prepare("SELECT * FROM Admins WHERE Nom='".$username."' AND password='".$password."'");
+		$query =$pdo->prepare("SELECT * FROM Admins WHERE Nom='".$username."' AND password='".$password."'"); //sentencia sql
 		$query->execute(); 
-		$numrows=$query->fetchColumn();
-		echo "$numrows";
+		$numrows=$query->fetchColumn();           //comprueba el numero de columnas que devuelve
+		
 		 if($numrows!=0){
 			 while($row = $query->fetch(PDO::FETCH_ASSOC))
 			 {
