@@ -90,28 +90,34 @@ function createLabel(block){
 var contador_respuestas = 0;
 function crearRespuesta(){
 	contador_respuestas ++;
-	var p_respuestas = document.createElement("p");
-	p_respuestas.setAttribute("id", "Respuesta"+contador_respuestas+"");
-	var txt_respuesta = document.createTextNode("Respuesta "+contador_respuestas+":");
-	p_respuestas.appendChild(txt_respuesta);
-	var label_respuesta = document.createElement("LABEL");
-	label_respuesta.setAttribute("id", "label_respuesta"+contador_respuestas+"");
-	var input_respuesta = document.createElement("INPUT");
-	input_respuesta.setAttribute("id", "Respuesta"+contador_respuestas+"");
-	input_respuesta.setAttribute("type", "textbox");
-	input_respuesta.setAttribute("required", "true");
-	label_respuesta.appendChild(input_respuesta);
-	var input_boton_respuesta = document.createElement("INPUT");
-	input_boton_respuesta.setAttribute("class", "button");
-	input_boton_respuesta.setAttribute("type", "submit");
-	input_boton_respuesta.setAttribute("value", "X");
-	input_boton_respuesta.setAttribute("id", contador_respuestas);
-	input_boton_respuesta.setAttribute("onClick", "eliminarRespuesta(this)");
-	var id_respuesta_actual = document.getElementById("Respuesta"+contador_respuestas+"");
-	p_respuestas.appendChild(label_respuesta);
-	p_respuestas.appendChild(input_boton_respuesta);
-	var padre = document.body.childNodes[6];
-	padre.appendChild(p_respuestas);
+	if (document.getElementById("Respuesta"+contador_respuestas+"").value==""){
+		document.getElementById("boton_respuesta").disabled=true;
+	}
+	else{
+		document.getElementById("boton_respuesta").disabled=false;
+		var p_respuestas = document.createElement("p");
+		p_respuestas.setAttribute("id", "Respuesta"+contador_respuestas+"");
+		var txt_respuesta = document.createTextNode("Respuesta "+contador_respuestas+":");
+		p_respuestas.appendChild(txt_respuesta);
+		var label_respuesta = document.createElement("LABEL");
+		label_respuesta.setAttribute("id", "label_respuesta"+contador_respuestas+"");
+		var input_respuesta = document.createElement("INPUT");
+		input_respuesta.setAttribute("id", "Respuesta"+contador_respuestas+"");
+		input_respuesta.setAttribute("type", "textbox");
+		input_respuesta.setAttribute("required", "true");
+		label_respuesta.appendChild(input_respuesta);
+		var input_boton_respuesta = document.createElement("INPUT");
+		input_boton_respuesta.setAttribute("class", "button");
+		input_boton_respuesta.setAttribute("type", "submit");
+		input_boton_respuesta.setAttribute("value", "X");
+		input_boton_respuesta.setAttribute("id", contador_respuestas);
+		input_boton_respuesta.setAttribute("onClick", "eliminarRespuesta(this)");
+		var id_respuesta_actual = document.getElementById("Respuesta"+contador_respuestas+"");
+		p_respuestas.appendChild(label_respuesta);
+		p_respuestas.appendChild(input_boton_respuesta);
+		var padre = document.body.childNodes[6];
+		padre.appendChild(p_respuestas);
+	}
 }
 
 function eliminarRespuesta(boton){
