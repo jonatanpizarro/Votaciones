@@ -60,6 +60,7 @@ function createLabel(block){
 
 	var boton_respuestas = document.createElement("input");
 	boton_respuestas.setAttribute("class", "button");
+	boton_respuestas.setAttribute("id", "boton_respuesta")
 	boton_respuestas.setAttribute("id" , "boton_respuestas");
 	boton_respuestas.setAttribute("type", "submit");
 	boton_respuestas.setAttribute("value", "Crear Respuesta");
@@ -89,7 +90,6 @@ function createLabel(block){
 var contador_respuestas = 0;
 function crearRespuesta(){
 	contador_respuestas ++;
-	//if ()
 	var p_respuestas = document.createElement("p");
 	p_respuestas.setAttribute("id", "Respuesta"+contador_respuestas+"");
 	var txt_respuesta = document.createTextNode("Respuesta "+contador_respuestas+":");
@@ -120,6 +120,16 @@ function eliminarRespuesta(boton){
 	p_respuesta.parentNode.removeChild(p_respuesta);
 	contador_respuestas --;
 }
+
+/*function validacionRespuesta(){
+	if (document.getElementById("Respuesta1")){
+		document.getElementById("boton_respuesta").disabled=true;
+	}
+	else{
+		document.getElementById("boton_respuesta").disabled=false;
+		crearRespuesta();
+	}
+}*/
 
 function validaciones(){
 	var campoPregunta = document.getElementById('TextBox').value;

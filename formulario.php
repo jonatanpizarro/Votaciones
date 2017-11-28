@@ -115,6 +115,7 @@
 		</div>
 	</header>
 	<h2>Cuestionarios</h2>
+
 	<input type="submit" class="button" value="Crear Cuestionario" onclick="createLabel(this)"/>
 
 
@@ -153,6 +154,8 @@
 
 
 	?>
+
+
 
 
 	<div id="div1"></div>
