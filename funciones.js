@@ -22,6 +22,7 @@ function createLabel(block){
 	input_pregunta.setAttribute("required", "true");
 	label_pregunta.appendChild(input_pregunta);
 
+
 	var p_fecha_in = document.createElement("p");
 	var label_fecha_in = document.createElement("LABEL");
 	var txt_fecha_in = document.createTextNode("Fecha Inicial: ");
@@ -53,8 +54,17 @@ function createLabel(block){
 	boton.setAttribute("class" , "button");
 	boton.setAttribute("value" , "Enviar votacion");
 	boton.setAttribute("onClick" , "validaciones()");
-	//boton.setAttribute("disabled" , "true");
 	p_boton.appendChild(boton);
+
+	p_pregunta.appendChild(boton);
+
+	var boton_respuestas = document.createElement("input");
+	boton_respuestas.setAttribute("class", "button");
+	boton_respuestas.setAttribute("id" , "boton_respuestas");
+	boton_respuestas.setAttribute("type", "submit");
+	boton_respuestas.setAttribute("value", "Crear Respuesta");
+	boton_respuestas.setAttribute("onClick", "crearRespuesta()");
+
 
 	var form= document.createElement("form");
 	form.setAttribute("action", "formulario.php");
@@ -64,10 +74,51 @@ function createLabel(block){
 	form.appendChild(p_fecha_in);
 	form.appendChild(p_fecha_out);
 	form.appendChild(p_boton);
+	//form.appendChild(boton_respuestas);
+
+	
+
 
 	var padre = document.body;
+	var padrediv = document.getElementById("div1");
 	padre.insertBefore(form, padre.childNodes[6]);
-	block.disabled="disabled";
+	padrediv.appendChild(boton_respuestas);
+	block.disabled="true";
+}
+
+var contador_respuestas = 0;
+function crearRespuesta(){
+	contador_respuestas ++;
+	//if ()
+	var p_respuestas = document.createElement("p");
+	p_respuestas.setAttribute("id", "Respuesta"+contador_respuestas+"");
+	var txt_respuesta = document.createTextNode("Respuesta "+contador_respuestas+":");
+	p_respuestas.appendChild(txt_respuesta);
+	var label_respuesta = document.createElement("LABEL");
+	label_respuesta.setAttribute("id", "label_respuesta"+contador_respuestas+"");
+	var input_respuesta = document.createElement("INPUT");
+	input_respuesta.setAttribute("id", "Respuesta"+contador_respuestas+"");
+	input_respuesta.setAttribute("type", "textbox");
+	input_respuesta.setAttribute("required", "true");
+	label_respuesta.appendChild(input_respuesta);
+	var input_boton_respuesta = document.createElement("INPUT");
+	input_boton_respuesta.setAttribute("class", "button");
+	input_boton_respuesta.setAttribute("type", "submit");
+	input_boton_respuesta.setAttribute("value", "X");
+	input_boton_respuesta.setAttribute("id", contador_respuestas);
+	input_boton_respuesta.setAttribute("onClick", "eliminarRespuesta(this)");
+	var id_respuesta_actual = document.getElementById("Respuesta"+contador_respuestas+"");
+	p_respuestas.appendChild(label_respuesta);
+	p_respuestas.appendChild(input_boton_respuesta);
+	var padre = document.body.childNodes[6];
+	padre.appendChild(p_respuestas);
+}
+
+function eliminarRespuesta(boton){
+	var id_Actual = boton.id;
+	var p_respuesta = document.getElementById("Respuesta"+id_Actual+"");
+	p_respuesta.parentNode.removeChild(p_respuesta);
+	contador_respuestas --;
 }
 
 function validaciones(){
