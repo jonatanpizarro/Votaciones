@@ -1,3 +1,39 @@
+<?php
+	session_start();
+	include 'connection.php';
+
+	if(isset($_SESSION["session_username"])){
+	// echo "Session is set"; 
+	header("Location: inicio.php");
+	}
+	 
+	if(isset($_POST["login"])){
+	   
+		if(!empty($_POST['usuario']) && !empty($_POST['pass'])) {
+			$username=$_POST['usuario'];												//Asigna a las variables el post 
+			$password=$_POST['pass']; 
+			 
+			$query =$pdo->prepare("SELECT * FROM Usuarios WHERE Nombre='".$username."' AND Password='".$password."'"); //sentencia sql
+			$query->execute(); 
+			$row=$query->fetch();           //comprueba el numero de columnas que devuelve
+			
+			$dbnom=$row['Nombre'];
+			$dbpassword=$row['Password'];
+
+			if($username == $dbnom && $password == $dbpassword){
+		 
+		 		$_SESSION['session_username']=$username;
+			 	header("Location: inicio.php");
+		 
+			}else{
+		 
+				$message = "Nombre de usuario ó contraseña invalida!";
+		 	}
+
+		}
+	}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,61 +48,6 @@
 	<title>Votaciones</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-
-
-<?php
-session_start();
-?>
- 
-<?php  include 'connection.php';?>
-
- 
-<?php
- 
-if(isset($_SESSION["session_username"])){
-// echo "Session is set"; 
-header("Location: inicio.php");
-}
- 
-if(isset($_POST["login"])){
- 
- 
-	
-  
-	if(!empty($_POST['usuario']) && !empty($_POST['pass'])) {
-		 $username=$_POST['usuario'];												//Asigna a las variables el post 
-		 $password=$_POST['pass']; 
-		 
-		$query =$pdo->prepare("SELECT * FROM Admins WHERE Nom='".$username."' AND password='".$password."'"); //sentencia sql
-		$query->execute(); 
-		$numrows=$query->fetchColumn();           //comprueba el numero de columnas que devuelve
-		
-		 if($numrows!=0){
-			 while($row = $query->fetch(PDO::FETCH_ASSOC))
-			 {
-			 $dbnom=$row['Nom'];
-			 $dbpassword=$row['Password'];
-			 }
-	 
-		if($username == $dbnom && $password == $dbpassword)
-	 
-	{
-	 
-	 	$_SESSION['session_username']=$username;
-	 
-	/* Redirect browser */
-		 header("Location: inicio.php");
-	 }
-		 } else {
-	 
-	$message = "Nombre de usuario ó contraseña invalida!";
-	 }
-	 
-		} else {
-	 $message = "Todos los campos son requeridos!";
-	}}
-
-?>
 <body>
 	<header><h1>Votaciones</h1></header>
 	<h2>Inicio de Sesion</h2>

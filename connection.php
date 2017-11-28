@@ -1,7 +1,7 @@
 <?php
 	try {
     $hostname = "localhost";
-    $dbname = "Proyecto_Vota1";
+    $dbname = "Proyecto_Vota";
     $username = "root";
     $pw = "Aws2-21";
     $pdo = new PDO ("mysql:host=$hostname;dbname=$dbname","$username","$pw");

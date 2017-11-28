@@ -124,32 +124,29 @@
 		session_start();
 		if (!empty($_GET['campoPregunta'])) {
 			
-			$query =$pdo->prepare("SELECT ID FROM Admins WHERE Nom='".$_SESSION['session_username']."'"); //sentencia sql
+			$query =$pdo->prepare("SELECT ID FROM Usuarios WHERE Nombre='".$_SESSION['session_username']."'"); //sentencia sql
 			$query->execute(); 
-			$numrows=$query->fetchColumn();   
+			$row=$query->fetch();   
       //comprueba el numero de columnas que devuelve
 			
-			if($numrows!=0){
-			 	echo "$numrows";
-				while($row = $query->fetch(PDO::FETCH_ASSOC)){
-			    	$dbid=$row['ID'];
-				}
+		   	$dbid=$row['ID'];
+				
 			}
 			
 			
-			$pregunta=$_GET['campoPregunta'];
+		$pregunta=$_GET['campoPregunta'];
+		
+		$query =$pdo->prepare("INSERT INTO Consulta(`Desc_Pregunta`,`ID_Usuario`) VALUES ('".$pregunta."','".$dbid."')"); 
 			
-			$query =$pdo->prepare("INSERT INTO Consulta(`Desc_Pregunta`,`ID_Usuario`) VALUES ('".$pregunta."','".$dbid."')"); 
-			
-			$query->execute(); 
-			
+		$query->execute(); 			
 			  //comprovo errors:
-			  $e= $query->errorInfo();
-			  if ($e[0]!='00000') {
+	  $e= $query->errorInfo();
+
+	  		 if ($e[0]!='00000') {
 			    echo "\nPDO::errorInfo():\n";
 			    die("Error accedint a dades: " . $e[2]);
   }
-		}
+		
 		
 
 
