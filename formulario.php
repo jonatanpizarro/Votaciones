@@ -119,5 +119,6 @@
 	<input type="submit" class="button" value="Crear Cuestionario" onclick="createLabel(this)"/>
 	<div id="div1"></div>
 	<footer>Votaciones Jonatan y Adria</footer>
+
 </body>
 </html>
