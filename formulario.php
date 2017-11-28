@@ -1,94 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-		body{
-			background-color: white;
-		}
-		header{
-			text-align: center;
-			background-color: white;
-			color: white;
-		}
-		.vota{
-			background-color: black;
-		}
-		footer{
-			text-align: center;
-			background-color: black;
-			color: white;
-		}
-		header nav {
-			background:black;
-			overflow:hidden;
-		}
-
-		header nav ul {
-			list-style:none;
-			}
-
-		header nav ul li {
-			float:left;
-		}
-		header nav ul li a {
-			padding:10px 20px;
-			display:block;
-			color:white;
-			text-decoration:none;
-		}
-
-		header nav ul li a:hover {
-			background: black;
-		}
-		ul.menu{
-		   list-style:none;
-		}
-
-		ul.menu ul{
-		   display:none;
-		   list-style:none;
-		}
-
-		ul.menu li:hover > ul{
-		   display:block;
-		}
-
-		#snow{
-			background: none;
-			background-image: url('img/s1.png'), url('img/s2.png'), url('img/s3.png');
-			height: 100%;
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 100%;
-			z-index:1;
-			-webkit-animation: snow 10s linear infinite;
-			-moz-animation: snow 10s linear infinite;
-			-ms-animation: snow 10s linear infinite;
-			animation: snow 10s linear infinite;
-		}
-		@keyframes snow {
-		  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-		  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
-		  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
-		}
-		@-moz-keyframes snow {
-		  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-		  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
-		  100% {background-position: 400px 1000px, 200px 400px, 100px 300px;}
-		}
-		@-webkit-keyframes snow {
-		  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-		  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
-		  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
-		}
-		@-ms-keyframes snow {
-		  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-		  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
-		  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
-		}	
-	</style>
 	<link rel="icon" type="image/ico" href="img/logo.ico" />
+	<link href="style.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="funciones.js"></script>
 	<title>Votaciones</title>
 </head>
@@ -103,8 +17,8 @@
 					<li><a href="inicio.php">INICIO</a></li>
 					<li><a>CONSULTAS</a>
 					<ul>
-					<li><a href="formulario.html">CREAR</a>
-					<a href="formulario.html">RESPONDER</a></li>
+					<li><a href="formulario.php">CREAR</a>
+					<a href="formulario.php">RESPONDER</a></li>
 					</ul>
 					</li>
 				</ul>
