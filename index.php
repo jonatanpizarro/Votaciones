@@ -29,10 +29,10 @@ header("Location: inicio.php");
 }
  
 if(isset($_POST["login"])){
-
+ 
  
 	
-  }
+  
 	if(!empty($_POST['usuario']) && !empty($_POST['pass'])) {
 		 $username=$_POST['usuario'];												//Asigna a las variables el post 
 		 $password=$_POST['pass']; 
@@ -64,7 +64,7 @@ if(isset($_POST["login"])){
 	 
 		} else {
 	 $message = "Todos los campos son requeridos!";
-	}
+	}}
 
 ?>
 <body>

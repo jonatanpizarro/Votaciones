@@ -53,6 +53,7 @@ function createLabel(block){
 	boton.setAttribute("class" , "button");
 	boton.setAttribute("value" , "Enviar votacion");
 	boton.setAttribute("onClick" , "validaciones()");
+	//boton.setAttribute("disabled" , "true");
 	p_boton.appendChild(boton);
 
 	var form= document.createElement("form");
@@ -71,23 +72,32 @@ function createLabel(block){
 
 function validaciones(){
 	var campoPregunta = document.getElementById('TextBox').value;
-	fechaActual();
-
-	if(campoPregunta === ''){
-		 alert("Pregunta vacia");
-		
-	}else{
-		 //Las validaciones que necesitas hacer
-	}
-
 	var campoFechaIni = document.getElementById('TextBox1').value;
+	var campoFechaFin = document.getElementById('TextBox2').value;
+	alert(campoPregunta);
+	alert(campoFechaFin);
+	
 
-	if(campoFechaIni === ''){
-		 alert("La fecha inicial esta vacia");
-		return false;
-	}else{
-		 //Las validaciones que necesitas hacer
+	//fechaActual();
+
+	if((campoPregunta === '') || (campoFechaFin ==='')){
+		 alert("Rellena los campos");
+		
+	}/*else if(campoFechaIni ===''){
+		 		
+			alert("La fecha inicial esta vacia");
+			return false;
+	}else if(campoFechaFin ===''){
+			
+			alert("La fecha final esta vacia");
+			return false;
+		
+	}*/else{
+		 window.location.replace("formulario.php?campoPregunta="+campoPregunta) ;
+		 alert("aaaaaaa");
 	}
+
+	
 }
 
 function fechaManana(){

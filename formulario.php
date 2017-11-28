@@ -116,6 +116,43 @@
 	</header>
 	<h2>Cuestionarios</h2>
 	<input type="submit" class="button" value="Crear Cuestionario" onclick="createLabel(this)"/>
+
+	<?php include 'connection.php'; ?>
+	<?php
+		session_start();
+		if (!empty($_GET['campoPregunta'])) {
+			
+			$query =$pdo->prepare("SELECT ID FROM Admins WHERE Nom='".$_SESSION['session_username']."'"); //sentencia sql
+			$query->execute(); 
+			$numrows=$query->fetchColumn();   
+      //comprueba el numero de columnas que devuelve
+			
+			 if($numrows!=0){
+				 while($row = $query->fetch(PDO::FETCH_ASSOC))
+				 {
+				 $dbid=$row['ID'];
+				 
+				 }}
+			
+			
+			$pregunta=$_GET['campoPregunta'];
+			
+			$query =$pdo->prepare("INSERT INTO Consulta(`Desc_Pregunta`,`ID_Usuario`) VALUES ('".$pregunta."','".$dbid."')"); 
+			
+			$query->execute(); 
+			
+			  //comprovo errors:
+			  $e= $query->errorInfo();
+			  if ($e[0]!='00000') {
+			    echo "\nPDO::errorInfo():\n";
+			    die("Error accedint a dades: " . $e[2]);
+  }
+		}
+		
+
+
+	?>
+
 </body>
 <footer>
 	Votaciones Jonatan y Adria
