@@ -128,12 +128,12 @@
 			$numrows=$query->fetchColumn();   
       //comprueba el numero de columnas que devuelve
 			
-			 if($numrows!=0){
-				 while($row = $query->fetch(PDO::FETCH_ASSOC))
-				 {
-				 $dbid=$row['ID'];
-				 
-				 }}
+			if($numrows!=0){
+			 	echo "$numrows";
+				while($row = $query->fetch(PDO::FETCH_ASSOC)){
+			    	$dbid=$row['ID'];
+				}
+			}
 			
 			
 			$pregunta=$_GET['campoPregunta'];
