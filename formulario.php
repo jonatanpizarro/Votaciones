@@ -18,7 +18,7 @@
 					<li><a>CONSULTAS</a>
 					<ul>
 					<li><a href="formulario.php">CREAR</a>
-					<a href="formulario.php">RESPONDER</a></li>
+					<a href="responder.php">RESPONDER</a></li>
 					</ul>
 					</li>
 				</ul>
@@ -47,19 +47,24 @@
 				
 			}
 			
-			
-		$pregunta=$_GET['campoPregunta'];
+		if (!empty($_GET['campoPregunta'])) {
+			$pregunta=$_GET['campoPregunta'];
 		
-		$query =$pdo->prepare("INSERT INTO Consulta(`Desc_Pregunta`,`ID_Usuario`) VALUES ('".$pregunta."','".$dbid."')"); 
+			$query =$pdo->prepare("INSERT INTO Consulta(`Desc_Pregunta`,`ID_Usuario`) VALUES ('".$pregunta."','".$dbid."')"); 
 			
-		$query->execute(); 			
-			  //comprovo errors:
-	  $e= $query->errorInfo();
+			$query->execute();
+			$e= $query->errorInfo();
 
 	  		 if ($e[0]!='00000') {
 			    echo "\nPDO::errorInfo():\n";
 			    die("Error accedint a dades: " . $e[2]);
   }
+		}else{
+
+		}
+		 			
+			  //comprovo errors:
+	  
 		
 		
 
