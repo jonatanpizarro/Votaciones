@@ -1,5 +1,6 @@
 var fecha;
 var manana;
+var contadorId=1;
 
 
 function createLabel(block){
@@ -119,12 +120,13 @@ function eliminarRespuesta(boton){
 	var p_respuesta = document.getElementById("P"+id_Actual+"");
 	p_respuesta.parentNode.removeChild(p_respuesta);
 	contador_respuestas --;
+	contadorId --;
 }
 
 function validacionRespuesta(){
-	var campoRespuestaExiste = document.getElementById("Respuesta1");
+	var campoRespuestaExiste = document.getElementById("Respuesta"+contadorId);
 	if (campoRespuestaExiste!=null){
-		var campoRespuesta = document.getElementById("Respuesta1").value;
+		var campoRespuesta = document.getElementById("Respuesta"+contadorId).value;
 		if (campoRespuesta!="") {
 			crearRespuesta();
 		}
