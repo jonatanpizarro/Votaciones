@@ -8,8 +8,9 @@
 	}
 	 
 	if(isset($_POST["login"])){
+		
 	   
-		if(!empty($_POST['usuario']) && !empty($_POST['pass'])) {
+		if(!empty($_POST['usuario']) && !empty($_POST['pass']) ) {
 			$username=$_POST['usuario'];												//Asigna a las variables el post 
 			$password=$_POST['pass']; 
 			 
@@ -19,9 +20,11 @@
 			
 			$dbnom=$row['Nombre'];
 			$dbpassword=$row['Password'];
+			
+			
 
 			if($username == $dbnom && $password == $dbpassword){
-		 
+		 	
 		 		$_SESSION['session_username']=$username;
 			 	header("Location: inicio.php");
 		 

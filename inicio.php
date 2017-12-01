@@ -24,7 +24,7 @@ if(!isset($_SESSION["session_username"])) {
 					<li><a>CONSULTAS</a>
 					<ul>
 					<li><a href="formulario.php">CREAR</a>
-					<a href="formulario.html">RESPONDER</a></li>
+					<a href="responder.php">RESPONDER</a></li>
 					</ul>
 					</li>
 					<li><a href="logout.php">LOGOUT</a></li>

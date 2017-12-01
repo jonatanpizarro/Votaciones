@@ -1,6 +1,5 @@
 var fecha;
 var manana;
-var contadorId=1;
 
 
 function createLabel(block){
@@ -97,6 +96,7 @@ function crearRespuesta(){
 	p_respuestas.appendChild(txt_respuesta);
 	var label_respuesta = document.createElement("LABEL");
 	label_respuesta.setAttribute("id", "label_respuesta"+contador_respuestas+"");
+	label_respuesta.setAttribute("class", "label");
 	var input_respuesta = document.createElement("INPUT");
 	input_respuesta.setAttribute("id", "Respuesta"+contador_respuestas+"");
 	input_respuesta.setAttribute("value", "");
@@ -117,16 +117,26 @@ function crearRespuesta(){
 
 function eliminarRespuesta(boton){
 	var id_Actual = boton.id;
-	var p_respuesta = document.getElementById("P"+id_Actual+"");
+	var numero=1;
+	contador_respuestas--;
+
+	var contador_label=1;
+	var p_respuesta = document.getElementById("P"+id_Actual);
 	p_respuesta.parentNode.removeChild(p_respuesta);
-	contador_respuestas --;
-	contadorId --;
+	var p_s = document.getElementByClassName("label")
+	for(var num=0 ; num<p_s.length; num++){
+		p_s[num].innerHTML="Respuesta "+numero+": ";
+		numero++;
+	}
+	//contador_respuestas --;
+	
 }
 
 function validacionRespuesta(){
-	var campoRespuestaExiste = document.getElementById("Respuesta"+contadorId);
+	
+	var campoRespuestaExiste = document.getElementById("Respuesta"+contador_respuestas);
 	if (campoRespuestaExiste!=null){
-		var campoRespuesta = document.getElementById("Respuesta"+contadorId).value;
+		var campoRespuesta = document.getElementById("Respuesta"+contador_respuestas).value;
 		if (campoRespuesta!="") {
 			crearRespuesta();
 		}
