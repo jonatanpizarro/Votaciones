@@ -34,22 +34,29 @@
 	$query =$pdo->prepare("SELECT * FROM Consulta");
 	$query->execute(); 
 	$row=$query->fetch();
+	$i=0;
 	echo
 	"<tr>"
 				."<td> ID </td>"
 				."<td> Pregunta </td>"
+				."<td> Vota </td>"
 				."</tr>";
 
 	while($row){
+		$i++;
 		echo 
 				"<tr>"
 				."<td>" . $row['ID']."</td>"
 				."<td>" . $row['Desc_Pregunta']."</td>"
+				."<td> <a href='vota.php'>VOTA</a> </td>";
 
-				."</tr>";
+				"</tr>";
 
 		$row=$query->fetch();
+	
+
 	}
+	
 
 	?>	
 	</table>

@@ -36,35 +36,58 @@
 	<?php include 'connection.php'; ?>
 	<?php
 		session_start();
-		if (!empty($_GET['campoPregunta'])) {
-			
-			$query =$pdo->prepare("SELECT ID FROM Usuarios WHERE Nombre='".$_SESSION['session_username']."'"); //sentencia sql
-			$query->execute(); 
-			$row=$query->fetch();   
-      //comprueba el numero de columnas que devuelve
-			
-		   	$dbid=$row['ID'];
+
+			if (!empty($_POST['pregunta'])) {
+				$pregunta=$_POST['pregunta'];
 				
-			}
+				
+				$query =$pdo->prepare("SELECT ID FROM Usuarios WHERE Nombre='".$_SESSION['session_username']."'"); //sentencia sql
+				$query->execute(); 
+				$row=$query->fetch();   
+	      //comprueba el numero de columnas que devuelve
+				
+			   	$dbid=$row['ID'];
+					
 			
-		if (!empty($_GET['campoPregunta'])) {
-			$pregunta=$_GET['campoPregunta'];
-		
-			$query =$pdo->prepare("INSERT INTO Consulta(`Desc_Pregunta`,`ID_Usuario`) VALUES ('".$pregunta."','".$dbid."')"); 
 			
+				$query =$pdo->prepare("INSERT INTO Consulta(`Desc_Pregunta`,`ID_Usuario`) VALUES ('".$pregunta."','".$dbid."')"); 
+				
+				$query->execute();
+				$e= $query->errorInfo();
+
+		  		 if ($e[0]!='00000') {
+				    echo "\nPDO::errorInfo():\n";
+				    die("Error accedint a dades: " . $e[2]);
+	  }}
+
+  		if (!empty($_POST['respuestas'])) {
+			$respuestas=$_POST['respuestas'];
+			$query = $pdo->prepare("select ID from Consulta where Desc_Pregunta='".$pregunta."'");
 			$query->execute();
+			$row = $query->fetch();
 			$e= $query->errorInfo();
 
-	  		 if ($e[0]!='00000') {
-			    echo "\nPDO::errorInfo():\n";
-			    die("Error accedint a dades: " . $e[2]);
-  }
-		}else{
+		  		 if ($e[0]!='00000') {
+				    echo "\nPDO::errorInfo():\n";
+				    die("Error accedint a dades: " . $e[2]);
+	  }
 
+			foreach ($respuestas as $key) {
+				$query = $pdo->prepare("insert into Opciones (ID_Consulta,Desc_Text) values('".$row['ID']."','".$key."')");
+				$query->execute();
+
+			$e= $query->errorInfo();
+
+		  		 if ($e[0]!='00000') {
+				    echo "\nPDO::errorInfo():\n";
+				    die("Error accedint a dades: " . $e[2]);
+	  }}
+
+		
 		}
+	
 		 			
-			  //comprovo errors:
-	  
+
 		
 		
 

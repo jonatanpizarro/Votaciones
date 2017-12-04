@@ -1,5 +1,8 @@
 var fecha;
 var manana;
+var contadorOpciones=0;
+var contadorBorrar=0;
+var lista=[];
 
 
 function createLabel(block){
@@ -15,10 +18,9 @@ function createLabel(block){
 	var label_pregunta = document.createElement("LABEL");
 	label_pregunta.setAttribute("id", "pregunta");
 	p_pregunta.appendChild(label_pregunta);
-	var input_pregunta = document.createElement("TEXTAREA");
+	var input_pregunta = document.createElement("INPUT");
 	input_pregunta.setAttribute("id", "TextBox");
-	input_pregunta.setAttribute("rows", "10");
-	input_pregunta.setAttribute("cols", "100");
+	input_pregunta.setAttribute("name","pregunta")
 	input_pregunta.setAttribute("required", "true");
 	label_pregunta.appendChild(input_pregunta);
 
@@ -92,7 +94,7 @@ function crearRespuesta(){
 	contador_respuestas ++;
 	var p_respuestas = document.createElement("p");
 	p_respuestas.setAttribute("id", "P"+contador_respuestas+"");
-	var txt_respuesta = document.createTextNode("Respuesta "+contador_respuestas+":");
+	var txt_respuesta = document.createTextNode("Respuesta: ");
 	p_respuestas.appendChild(txt_respuesta);
 	var label_respuesta = document.createElement("LABEL");
 	label_respuesta.setAttribute("id", "label_respuesta"+contador_respuestas+"");
@@ -100,6 +102,7 @@ function crearRespuesta(){
 	var input_respuesta = document.createElement("INPUT");
 	input_respuesta.setAttribute("id", "Respuesta"+contador_respuestas+"");
 	input_respuesta.setAttribute("value", "");
+	input_respuesta.setAttribute("name","respuestas[]");
 	input_respuesta.setAttribute("type", "textbox");
 	input_respuesta.setAttribute("required", "true");
 	label_respuesta.appendChild(input_respuesta);
@@ -113,12 +116,20 @@ function crearRespuesta(){
 	p_respuestas.appendChild(input_boton_respuesta);
 	var padre = document.body.childNodes[6];
 	padre.appendChild(p_respuestas);
+	contadorOpciones++;
+	lista.push(contador_respuestas);
+	alert(lista);
 }
 
 function eliminarRespuesta(boton){
+	
+	contadorBorrar++;
+	contadorOpciones++;
 	var id_Actual = boton.id;
+	alert(id_Actual);
 	var numero=1;
-	contador_respuestas--;
+	//lista.delete(id_Actual);
+	alert(lista);
 
 	var contador_label=1;
 	var p_respuesta = document.getElementById("P"+id_Actual);
@@ -149,6 +160,7 @@ function validaciones(){
 	var campoPregunta = document.getElementById('TextBox').value;
 	var campoFechaIni = document.getElementById('TextBox1').value;
 	var campoFechaFin = document.getElementById('TextBox2').value;
+	//var camporespuesta =document.getElementById('Ruespuesta1').value;
 	alert(campoPregunta);
 	alert(campoFechaFin);
 	
@@ -158,19 +170,11 @@ function validaciones(){
 	if((campoPregunta === '') || (campoFechaFin ==='')){
 		 alert("Rellena los campos");
 		
-	}/*else if(campoFechaIni ===''){
-		 		
-			alert("La fecha inicial esta vacia");
-			return false;
-	}else if(campoFechaFin ===''){
-			
-			alert("La fecha final esta vacia");
-			return false;
-		
-	}*/else{
-		 window.location.replace("formulario.php?campoPregunta="+campoPregunta) ;
-		 alert("aaaaaaa");
+	}else{
+		 //window.location.replace("formulario.php?campoPregunta="+campoPregunta) ;
+		 
 	}
+	
 
 	
 }
