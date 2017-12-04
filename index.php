@@ -47,29 +47,40 @@
 		header{
 			text-align: center;
 		}
+		div{
+			margin: 0 auto;
+			border-style: solid;
+			width: 300px;
+			margin-bottom: 150px;
+		}
+		h1, footer{
+			background-color: black;
+			color: white;
+		}
+		
 	</style>
 	<title>Votaciones</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<header><h1>Votaciones</h1></header>
-	<h2>Inicio de Sesion</h2>
-	<form action="index.php" method="POST">
-	<p>
-	<label for="user_login">Nom Usuari: <br />
-	<input type="text" name="usuario" class="input" value="" size="20"/></label>
-	</p>
-	<p>
-	<label for="user_login">Contrasenya: <br />
-	<input type="password" name="pass" class="input" value="" size="20"/></label>
-	</p>
-	<p class="submit">
-	<input type="submit" name="login" class="button" value="Entrar"/></label>
-	</p>
-	<!--<p class="regtext">No estas registrat? <a href="registrar.php">Registrarse</a></p>!-->
-	</form>
+	<div>
+		<header><h1>Votaciones</h1></header>
+		<h2>Inicio de Sesion</h2>
+		<form action="index.php" method="POST">
+		<p>
+		<label for="user_login">Nom Usuari: <br />
+		<input type="text" name="usuario" class="input" value="" size="20"/></label>
+		</p>
+		<p>
+		<label for="user_login">Contrasenya: <br />
+		<input type="password" name="pass" class="input" value="" size="20"/></label>
+		</p>
+		<p class="submit">
+		<input type="submit" name="login" class="button" value="Entrar"/></label>
+		</p>
+		<!--<p class="regtext">No estas registrat? <a href="registrar.php">Registrarse</a></p>!-->
+		</form>
+	</div>
+	<footer>Votaciones Jonatan y Adrià</footer>
 </body>
-<footer>
-	Votaciones Jonatan y Adrià
-</footer>
 </html>
