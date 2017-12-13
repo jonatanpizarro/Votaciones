@@ -54,11 +54,11 @@ if (isset($_POST['respuesta'])) {
 		<div>
 			<nav>
 				<ul class="menu">
-					<li><a href="inicio.php">INICIO</a></li>
+					<li><a href="paginaUsuario.php">INICIO</a></li>
 					<li><a>CONSULTAS</a>
 					<ul>
-					<li><a href="formulario.php">CREAR</a>
-					<a href="responder.php">RESPONDER</a></li>
+					
+					<a href="responderUsuario.php">RESPONDER</a></li>
 					</ul>
 					</li>
 				</ul>

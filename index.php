@@ -24,13 +24,21 @@
 			
 
 			if($username == $dbnom && $password == $dbpassword){
-		 	
-		 		$_SESSION['session_username']=$username;
-			 	header("Location: inicio.php");
-		 
-			}else{
-		 
-				$message = "Nombre de usuario ó contraseña invalida!";
+
+				$query =$pdo->prepare("SELECT Admin FROM Usuarios WHERE Nombre='".$username."' AND Password='".$password."'"); //sentencia sql
+				$query->execute(); 
+				$row=$query->fetch();  
+
+				$admin=$row['Admin'];
+			 	
+			 		if($admin==1){			 			
+			 			$_SESSION['session_username']=$username;
+			 			header("Location: paginaUsuario.php");
+			 		}else{
+			 			$_SESSION['session_username']=$username;
+			 			header("Location: inicio.php");
+			 		}
+
 		 	}
 
 		}

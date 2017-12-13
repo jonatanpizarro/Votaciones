@@ -20,11 +20,10 @@ if(!isset($_SESSION["session_username"])) {
 		<div>
 			<nav>
 				<ul class="menu">
-					<li><a href="inicio.php">INICIO</a></li>
+					<li><a href="paginaUsuario.php">INICIO</a></li>
 					<li><a>CONSULTAS</a>
 					<ul>
-					<li><a href="formulario.php">CREAR</a>
-					<a href="responder.php">RESPONDER</a></li>
+					<a href="responderUsuario.php">RESPONDER</a></li>
 					</ul>
 					</li>
 					<li><a href="logout.php">LOGOUT</a></li>
@@ -34,9 +33,16 @@ if(!isset($_SESSION["session_username"])) {
 		<div id="welcome">
 		 	<h2>Bienvenido, <span><?php echo $_SESSION['session_username'];?>! </span></h2>
 		</div>
-	<footer>Votaciones Jonatan y Adria</footer>
-<!--
 <?php
-}
+	$query1 = $pdo->prepare("SELECT * from Opciones where ID_consulta='".$row['ID']."';");
+	$query1->execute();
+	$row1 = $query1->fetch();
+
+
+	echo "<div id='consultasPendientes'>";
+		
+	echo "<div id='consultasRespondidas'>";
+
+
 ?>
--->
+	<footer>Votaciones Jonatan y Adria</footer>

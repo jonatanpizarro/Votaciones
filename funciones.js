@@ -5,6 +5,15 @@ var contadorBorrar=0;
 var lista=[];
 
 
+function desplegar(){
+	var longitud = document.body.children[2].children[2].children.length;
+	
+	for (var x=0; x<longitud; x++){
+		var elemento = document.body.children[2].children[2].children[x].children[0];
+		elemento.className += "desplegado";
+}
+
+
 function createLabel(block){
 
 	fechaManana(manana);
@@ -118,7 +127,7 @@ function crearRespuesta(){
 	padre.appendChild(p_respuestas);
 	contadorOpciones++;
 	lista.push(contador_respuestas);
-	alert(lista);
+	;
 }
 
 function eliminarRespuesta(boton){
@@ -126,10 +135,9 @@ function eliminarRespuesta(boton){
 	contadorBorrar++;
 	contadorOpciones++;
 	var id_Actual = boton.id;
-	alert(id_Actual);
 	var numero=1;
 	//lista.delete(id_Actual);
-	alert(lista);
+
 
 	var contador_label=1;
 	var p_respuesta = document.getElementById("P"+id_Actual);
@@ -161,8 +169,7 @@ function validaciones(){
 	var campoFechaIni = document.getElementById('TextBox1').value;
 	var campoFechaFin = document.getElementById('TextBox2').value;
 	//var camporespuesta =document.getElementById('Ruespuesta1').value;
-	alert(campoPregunta);
-	alert(campoFechaFin);
+
 	
 
 	//fechaActual();
@@ -185,3 +192,5 @@ function fechaManana(){
 	fecha=new Date();
 	manana=new Date(fecha.getTime() + 24*60*60*1000);	
 }
+
+
