@@ -37,6 +37,6 @@ if(!isset($_SESSION["session_username"])) {
 	<footer>Votaciones Jonatan y Adria</footer>
 <!--
 <?php
-}
+
 ?>
 -->

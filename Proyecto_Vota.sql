@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 20-11-2017 a les 20:16:03
--- Versió del servidor: 5.7.20-0ubuntu0.16.04.1
--- Versió de PHP: 7.0.22-0ubuntu0.16.04.1
+-- Tiempo de generación: 15-12-2017 a las 16:20:17
+-- Versión del servidor: 5.7.20-0ubuntu0.16.04.1
+-- Versión de PHP: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,168 +17,180 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `Proyecto_Vota`
+-- Base de datos: `Proyecto_Vota`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Admins`
---
-
-CREATE TABLE `Admins` (
-  `ID` int(3) NOT NULL,
-  `Nom` varchar(15) NOT NULL,
-  `Email` varchar(30) NOT NULL,
-  `Password` varchar(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de la taula `Consulta`
+-- Estructura de tabla para la tabla `Consulta`
 --
 
 CREATE TABLE `Consulta` (
   `ID` int(3) NOT NULL,
-  `Tipo` int(11) NOT NULL,
   `Desc_Pregunta` varchar(150) NOT NULL,
-  `ID_Usuario` int(3) NOT NULL,
-  `ID_Usuario_Admin` int(3) NOT NULL
+  `ID_Usuario` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `Consulta`
+--
+
+INSERT INTO `Consulta` (`ID`, `Desc_Pregunta`, `ID_Usuario`) VALUES
+(77, 'hola', 1),
+(78, 'alo', 1),
+(79, 'asd', 1),
+(80, 'tfyfty', 1),
+(81, 'colacao o nesquik', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Opciones`
+-- Estructura de tabla para la tabla `Opciones`
 --
 
 CREATE TABLE `Opciones` (
   `ID` int(3) NOT NULL,
   `ID_Consulta` int(3) NOT NULL,
-  `Desc_Text` int(11) NOT NULL
+  `Desc_Text` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `Opciones`
+--
+
+INSERT INTO `Opciones` (`ID`, `ID_Consulta`, `Desc_Text`) VALUES
+(6, 77, 'adios'),
+(7, 77, 'hola'),
+(8, 78, 'asd'),
+(9, 79, 'asd'),
+(10, 79, 'dsa'),
+(11, 80, 'asd'),
+(12, 80, 'zfs'),
+(13, 81, 'Nesquik'),
+(14, 81, 'Colacao');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Votantes`
+-- Estructura de tabla para la tabla `Usuarios`
 --
 
-CREATE TABLE `Votantes` (
+CREATE TABLE `Usuarios` (
   `ID` int(3) NOT NULL,
-  `Nombre` int(15) NOT NULL,
-  `Email` int(30) NOT NULL,
-  `Password` int(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `Nombre` varchar(15) COLLATE latin1_spanish_ci NOT NULL,
+  `Email` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `Password` varchar(8) CHARACTER SET latin1 NOT NULL,
+  `Admin` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `Usuarios`
+--
+
+INSERT INTO `Usuarios` (`ID`, `Nombre`, `Email`, `Password`, `Admin`) VALUES
+(1, 'Admin1', 'Admin1@gmail.com', '12345678', 0),
+(2, 'loco', 'mam', '123', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Votos`
+-- Estructura de tabla para la tabla `Voto`
 --
 
-CREATE TABLE `Votos` (
+CREATE TABLE `Voto` (
   `ID` int(3) NOT NULL,
-  `ID_Opcion` int(3) NOT NULL
+  `ID_Opcion` int(3) NOT NULL,
+  `ID_Usuario` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexos per taules bolcades
+-- Volcado de datos para la tabla `Voto`
+--
+
+INSERT INTO `Voto` (`ID`, `ID_Opcion`, `ID_Usuario`) VALUES
+(1, 6, 1),
+(2, 13, 2);
+
+--
+-- Índices para tablas volcadas
 --
 
 --
--- Index de la taula `Admins`
---
-ALTER TABLE `Admins`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Index de la taula `Consulta`
+-- Indices de la tabla `Consulta`
 --
 ALTER TABLE `Consulta`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID_Usuario` (`ID_Usuario`),
-  ADD KEY `ID_Usuario_Admin` (`ID_Usuario_Admin`),
-  ADD KEY `ID_Usuario_Admin_2` (`ID_Usuario_Admin`);
+  ADD KEY `ID_Usuario` (`ID_Usuario`);
 
 --
--- Index de la taula `Opciones`
+-- Indices de la tabla `Opciones`
 --
 ALTER TABLE `Opciones`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ID_Consulta` (`ID_Consulta`),
-  ADD KEY `ID_Consulta_2` (`ID_Consulta`);
+  ADD KEY `ID_Consulta_2` (`ID_Consulta`),
+  ADD KEY `ID_Consulta_3` (`ID_Consulta`);
 
 --
--- Index de la taula `Votantes`
+-- Indices de la tabla `Usuarios`
 --
-ALTER TABLE `Votantes`
+ALTER TABLE `Usuarios`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Index de la taula `Votos`
+-- Indices de la tabla `Voto`
 --
-ALTER TABLE `Votos`
+ALTER TABLE `Voto`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID_Opcion` (`ID_Opcion`);
+  ADD KEY `ID_Opcion` (`ID_Opcion`),
+  ADD KEY `ID_Usuario` (`ID_Usuario`);
 
 --
--- AUTO_INCREMENT per les taules bolcades
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT per la taula `Admins`
---
-ALTER TABLE `Admins`
-  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT per la taula `Consulta`
+-- AUTO_INCREMENT de la tabla `Consulta`
 --
 ALTER TABLE `Consulta`
-  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 --
--- AUTO_INCREMENT per la taula `Opciones`
+-- AUTO_INCREMENT de la tabla `Opciones`
 --
 ALTER TABLE `Opciones`
-  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
--- AUTO_INCREMENT per la taula `Votantes`
+-- AUTO_INCREMENT de la tabla `Usuarios`
 --
-ALTER TABLE `Votantes`
-  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Usuarios`
+  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT per la taula `Votos`
+-- AUTO_INCREMENT de la tabla `Voto`
 --
-ALTER TABLE `Votos`
-  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Voto`
+  MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- Restriccions per taules bolcades
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restriccions per la taula `Admins`
---
-ALTER TABLE `Admins`
-  ADD CONSTRAINT `Admins_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `Consulta` (`ID_Usuario_Admin`);
-
---
--- Restriccions per la taula `Consulta`
+-- Filtros para la tabla `Consulta`
 --
 ALTER TABLE `Consulta`
-  ADD CONSTRAINT `Consulta_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `Opciones` (`ID_Consulta`);
+  ADD CONSTRAINT `Consulta_ibfk_1` FOREIGN KEY (`ID_Usuario`) REFERENCES `Usuarios` (`ID`);
 
 --
--- Restriccions per la taula `Opciones`
+-- Filtros para la tabla `Opciones`
 --
 ALTER TABLE `Opciones`
-  ADD CONSTRAINT `Opciones_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `Votos` (`ID_Opcion`);
+  ADD CONSTRAINT `Opciones_ibfk_1` FOREIGN KEY (`ID_Consulta`) REFERENCES `Consulta` (`ID`);
 
 --
--- Restriccions per la taula `Votantes`
+-- Filtros para la tabla `Voto`
 --
-ALTER TABLE `Votantes`
-  ADD CONSTRAINT `Votantes_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `Consulta` (`ID_Usuario`);
+ALTER TABLE `Voto`
+  ADD CONSTRAINT `Voto_ibfk_1` FOREIGN KEY (`ID_Opcion`) REFERENCES `Opciones` (`ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
