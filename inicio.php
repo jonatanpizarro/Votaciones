@@ -33,6 +33,61 @@ if(!isset($_SESSION["session_username"])) {
 		</div>
 		<div id="welcome">
 		 	<h2>Bienvenido, <span><?php echo $_SESSION['session_username'];?>! </span></h2>
+		 	<?php
+	
+	$query =$pdo->prepare("SELECT * FROM Consulta");
+	$query->execute(); 
+	$row=$query->fetch();
+
+	$e= $query->errorInfo();
+
+		  		 if ($e[0]!='00000') {
+				    echo "\nPDO::errorInfo():\n";
+				    die("Error accedint a dades: " . $e[2]);
+	  }
+	
+
+
+	$idDiv=0;
+	echo "<div class='consultas'>";
+
+	while($row){
+		$idDiv++;
+		echo "<div id='".$idDiv."' '>".$idDiv." - ".$row['Desc_Pregunta'];
+
+		echo "<div class='plegable'>";
+			$query1 = $pdo->prepare("SELECT * from Opciones where ID_consulta='".$row['ID']."';");
+			$query1->execute();
+			$row1 = $query1->fetch();
+
+			$e= $query1->errorInfo();
+
+		  		 if ($e[0]!='00000') {
+				    echo "\nPDO::errorInfo():\n";
+				    die("Error accedint a dades: " . $e[2]);
+	  }
+
+
+
+			echo "<form action='responder.php' method='post'>";
+
+			while ($row1) {
+				echo "<input type='radio' name='respuesta' value='".$row1['ID']."'> ".$row1['Desc_Text']."</input>";
+				echo "<br>";
+				$row1 = $query1->fetch();
+			}
+			echo "<input type='submit' value='Vota'></input>";
+			echo "</form>";
+			echo "</div>";
+	echo "</div>";
+	$row = $query->fetch();
+	}
+	echo "</div>";
+
+		
+    
+
+	?>	
 		</div>
 
 		<?php include 'connection.php'; ?>
