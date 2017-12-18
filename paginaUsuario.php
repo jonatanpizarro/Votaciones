@@ -33,16 +33,47 @@ if(!isset($_SESSION["session_username"])) {
 		<div id="welcome">
 		 	<h2>Bienvenido, <span><?php echo $_SESSION['session_username'];?>! </span></h2>
 		</div>
+<?php include 'connection.php'; ?>
 <?php
-	$query1 = $pdo->prepare("SELECT * from Opciones where ID_consulta='".$row['ID']."';");
+
+	
+
+
+	$query = $pdo->prepare("SELECT * from Usuarios where Nombre='".$_SESSION['session_username']."';");
+	$query->execute();
+	$row = $query->fetch();
+
+
+
+
+	$query1 = $pdo->prepare("SELECT ID_Opcion from Voto where ID_Usuario='".$row['ID']."';");
 	$query1->execute();
 	$row1 = $query1->fetch();
 
 
-	echo "<div id='consultasPendientes'>";
 		
+	
 	echo "<div id='consultasRespondidas'>";
+	echo "<h3> Consultas respondidas</h3>";
 
+
+	while ($row1) {
+		$query2 = $pdo->prepare("SELECT ID_Consulta from Opciones where ID='".$row1['ID_Opcion']."';");
+		$query2->execute();
+		$row2 = $query2->fetch();
+
+		$query3 = $pdo->prepare("SELECT Desc_Pregunta from Consulta where ID='".$row2['ID_Consulta']."';");
+		$query3->execute();
+		$row3 = $query3->fetch();
+		echo "<div>";
+		echo $row3['Desc_Pregunta'];
+		echo "</div>";
+		$row1 = $query1->fetch();
+
+	}
+
+	echo "<div id='consultasPendientes'>";
+	echo "<h3> Consultas pendientes </h3>";
 
 ?>
 	<footer>Votaciones Jonatan y Adria</footer>
