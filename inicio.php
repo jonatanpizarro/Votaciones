@@ -33,64 +33,10 @@ if(!isset($_SESSION["session_username"])) {
 		</div>
 		<div id="welcome">
 		 	<h2>Bienvenido, <span><?php echo $_SESSION['session_username'];?>! </span></h2>
-		 	<?php
-	
-	$query =$pdo->prepare("SELECT * FROM Consulta");
-	$query->execute(); 
-	$row=$query->fetch();
-
-	$e= $query->errorInfo();
-
-		  		 if ($e[0]!='00000') {
-				    echo "\nPDO::errorInfo():\n";
-				    die("Error accedint a dades: " . $e[2]);
-	  }
-	
-
-
-	$idDiv=0;
-	echo "<div class='consultas'>";
-
-	while($row){
-		$idDiv++;
-		echo "<div id='".$idDiv."' '>".$idDiv." - ".$row['Desc_Pregunta'];
-
-		echo "<div class='plegable'>";
-			$query1 = $pdo->prepare("SELECT * from Opciones where ID_consulta='".$row['ID']."';");
-			$query1->execute();
-			$row1 = $query1->fetch();
-
-			$e= $query1->errorInfo();
-
-		  		 if ($e[0]!='00000') {
-				    echo "\nPDO::errorInfo():\n";
-				    die("Error accedint a dades: " . $e[2]);
-	  }
-
-
-
-			echo "<form action='responder.php' method='post'>";
-
-			while ($row1) {
-				echo "<input type='radio' name='respuesta' value='".$row1['ID']."'> ".$row1['Desc_Text']."</input>";
-				echo "<br>";
-				$row1 = $query1->fetch();
-			}
-			echo "<input type='submit' value='Vota'></input>";
-			echo "</form>";
-			echo "</div>";
-	echo "</div>";
-	$row = $query->fetch();
-	}
-	echo "</div>";
-
-		
-    
-
-	?>	
+		 	
 		</div>
 
-		<?php include 'connection.php'; ?>
+<?php include 'connection.php'; ?>
 <?php
 
 	
@@ -129,8 +75,74 @@ if(!isset($_SESSION["session_username"])) {
 
 	}
 
+	
+
+	
+
+
+	$query = $pdo->prepare("SELECT * from Usuarios where Nombre='".$_SESSION['session_username']."';");
+	$query->execute();
+	$row = $query->fetch();
+
+
+
+
+	$query1 = $pdo->prepare("SELECT ID_Opcion from Voto where ID_Usuario='".$row['ID']."';");
+	$query1->execute();
+	$row1 = $query1->fetch();
+
+
+
+
+
+	$query2 = $pdo->prepare("SELECT ID_Consulta from Opciones where ID='".$row1['ID_Opcion']."';");
+		$query2->execute();
+		$row2 = $query2->fetch();
+
+
+
+		
+	
 	echo "<div id='consultasPendientes'>";
 	echo "<h3> Consultas pendientes </h3>";
+
+	if (empty($row1)) {
+		
+		$query10 = $pdo->prepare("SELECT Desc_Pregunta from Consulta ");
+		$query10->execute();
+		$row10 = $query10->fetch();
+
+		while ($row10) {
+			
+			
+			echo "<div>";
+			echo $row10['Desc_Pregunta'];
+			echo "</div>";
+
+			$row10 = $query10->fetch();
+		}
+	}
+
+	$query8 = $pdo->prepare("SELECT Desc_Pregunta from Consulta ");
+		$query8->execute();
+		$row8 = $query8->fetch();
+
+
+
+
+	while ($row8) {
+		echo "a";
+		
+
+		$query3 = $pdo->prepare("SELECT Desc_Pregunta from Consulta where ID!='".$row2['ID_Consulta']."';");
+		$query3->execute();
+		$row3 = $query3->fetch();
+		echo "<div>";
+		echo $row3['Desc_Pregunta'];
+		echo "</div>";
+		$row8 = $query8->fetch();
+
+	}
 
 ?>
 	<footer>Votaciones Jonatan y Adria</footer>
