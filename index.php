@@ -13,17 +13,21 @@
 		if(!empty($_POST['usuario']) && !empty($_POST['pass']) ) {
 			$username=$_POST['usuario'];												//Asigna a las variables el post 
 			$password=$_POST['pass']; 
+
 			 
-			$query =$pdo->prepare("SELECT * FROM Usuarios WHERE Nombre='".$username."' AND Password='".$password."'"); //sentencia sql
+			$query =$pdo->prepare("SELECT * FROM Usuarios WHERE Nombre='".$username."' AND Password='".sha1($password)."'"); //sentencia sql
 			$query->execute(); 
 			$row=$query->fetch();           //comprueba el numero de columnas que devuelve
 			
 			$dbnom=$row['Nombre'];
 			$dbpassword=$row['Password'];
+			echo sha1($password);
+			echo $dbpassword;
+
 			
 			
 
-			if($username == $dbnom && $password == $dbpassword){
+			if($username == $dbnom && sha1($password) == $dbpassword){
 
 				$query =$pdo->prepare("SELECT Admin FROM Usuarios WHERE Nombre='".$username."' AND Password='".$password."'"); //sentencia sql
 				$query->execute(); 
@@ -86,7 +90,7 @@
 		<p class="submit">
 		<input type="submit" name="login" class="button" value="Entrar"/></label>
 		</p>
-		<!--<p class="regtext">No estas registrat? <a href="registrar.php">Registrarse</a></p>!-->
+		<p class="regtext">No estas registrat? <a href="registrar.php">Registrarse</a></p>
 		</form>
 	</div>
 	<footer>Votaciones Jonatan y Adrià</footer>
