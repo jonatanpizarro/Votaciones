@@ -52,12 +52,13 @@
 	  				break;
 					}
 					$row=$query->fetch(); 
+					$dbnom=$row['Nombre'];
+					$dbpassword=$row['Password'];
 				}
 			}
 			 
 			
-			$dbnom=$row['Nombre'];
-			$dbpassword=$row['Password'];
+			
 			
 			
 

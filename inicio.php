@@ -94,6 +94,7 @@ if(!isset($_SESSION["session_username"])) {
 
 
 
+
 	$query2 = $pdo->prepare("SELECT ID_Consulta from Opciones where ID='".$row1['ID_Opcion']."';");
 		$query2->execute();
 		$row2 = $query2->fetch();
@@ -105,7 +106,22 @@ if(!isset($_SESSION["session_username"])) {
 	echo "<div id='consultasPendientes'>";
 	echo "<h3> Consultas pendientes </h3>";
 
-	
+	if (empty($row1)) {
+		
+		$query10 = $pdo->prepare("SELECT Desc_Pregunta from Consulta ");
+		$query10->execute();
+		$row10 = $query10->fetch();
+
+		while ($row10) {
+			
+			
+			echo "<div>";
+			echo $row10['Desc_Pregunta'];
+			echo "</div>";
+
+			$row10 = $query10->fetch();
+		}
+	}
 
 	$query3 = $pdo->prepare("SELECT Desc_Pregunta from Consulta where ID!='".$row2['ID_Consulta']."';");
 		$query3->execute();
@@ -114,15 +130,17 @@ if(!isset($_SESSION["session_username"])) {
 
 
 
-
-
 	while ($row3) {
-				
+		
+		
+
+		
 		echo "<div>";
 		echo $row3['Desc_Pregunta'];
 		echo "</div>";
-		$row3 = $query3->fetch();}
+		$row3 = $query3->fetch();
 
+	}
 
 ?>
 	<footer>Votaciones Jonatan y Adria</footer>

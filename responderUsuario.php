@@ -106,7 +106,7 @@ if (isset($_POST['respuesta'])) {
 
 
 
-			echo "<form action='responder.php' method='post'>";
+			echo "<form action='responderUsuario.php' method='post'>";
 
 			while ($row1) {
 				echo "<input type='radio' name='respuesta' value='".$row1['ID']."'> ".$row1['Desc_Text']."</input>";
