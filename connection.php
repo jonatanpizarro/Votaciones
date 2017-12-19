@@ -3,8 +3,8 @@
     $hostname = "localhost";
     $dbname = "Proyecto_Vota";
 
-    $username = "root";
-    $pw = "Aws2-21";
+    $username = "Admin";
+    $pw = "P@ssw0rd";
 
 
 
