@@ -1,10 +1,13 @@
+//funciones.js 25/11/2017 Jonatan Pizarro y Adrià Garcia-Fraile
+
+//variables
 var fecha;
 var manana;
 var contadorOpciones=0;
 var contadorBorrar=0;
 var lista=[];
 
-
+//funcion que crea mediante el DOM todo el formulario para crear las consultas.
 function createLabel(block){
 
 	fechaManana(manana);
@@ -37,6 +40,11 @@ function createLabel(block){
 	input_fecha_in.setAttribute("required", "true");
 	input_fecha_in.setAttribute("value", manana);
 	label_fecha_in.appendChild(input_fecha_in);
+	var input_hora_in = document.createElement("INPUT");
+	input_hora_in.setAttribute("id", "hora_ini");
+	input_hora_in.setAttribute("type", "time");
+	input_hora_in.setAttribute("required", "true");
+	label_fecha_in.appendChild(input_hora_in);
 
 	var p_fecha_out = document.createElement("p");
 	var label_fecha_out = document.createElement("LABEL");
@@ -49,6 +57,11 @@ function createLabel(block){
 	input_fecha_out.setAttribute("type", "date");
 	input_fecha_out.setAttribute("required", "true");
 	label_fecha_out.appendChild(input_fecha_out);
+	var input_hora_out = document.createElement("INPUT");
+	input_hora_out.setAttribute("id", "hora_out");
+	input_hora_out.setAttribute("type", "time");
+	input_hora_out.setAttribute("required", "true");
+	label_fecha_out.appendChild(input_hora_out);
 
 	var boton = document.createElement("input");
 	boton.setAttribute("type" , "submit");
@@ -92,6 +105,7 @@ function createLabel(block){
 	block.disabled="true";
 }
 
+//funcion que crea meidante el DOM Input's para añadir respuestas. 
 var contador_respuestas = 0;
 function crearRespuesta(){
 	contador_respuestas ++;
@@ -158,6 +172,38 @@ function bajarRespuesta(event){
 	var padre = document.body.childNodes[6];
 	padre.appendChild(cln);
 	ctarget.parentNode.removeChild(ctarget);
+}
+
+function fechaHora(fecha_in, fecha_out){
+	var n_fecha = new Date();
+	n_fecha.setSeconds(00);
+	n_fecha.setMilliseconds(00);
+
+	var fecha_in = document.getElementById("fecha_in").value;
+	var fecha_out = document.getElementById("fecha_out").value;
+	var hora_in = document.getElementById("hora_in").value;
+	var hora_out = document.getElementById("hora_out").value;
+
+	fecha_in = fecha_in.split("-");
+	fecha_out = fecha_out.split("-");
+	hora_in = hora_in.split(":");
+	hora_out = hora_out.split(":");
+
+	fecha_in = new Date(parseInt(fecha_in[0]), parseInt(fecha_in[1]-1), parseInt(fecha_in[2]), parseInt(hora_in[0]), parseInt(hora_int[1]));
+	fecha_out = new Date(parseInt(fecha_out[0]), parseInt(fecha_out[1]-1), parseInt(fecha_out[2]), parseInt(hora_out[0]), parseInt(hora_out[1]));
+
+	var fecha_hora = fecha_out - fecha_in;
+	fecha_hora = fecha_hora / 3600;
+
+	if(fecha_in <= hoy){
+		aler("La fecha debe ser mayor a la fecha actual.")
+	}
+	else if(fecha_hora < 0){
+		alert("la fecha debe ser mayor que la fecha de inicio.")
+	}
+	else if(fecha_hora < 4000 && fecha_hora >= 0){
+		alert("La hora debe ser mayor o igual a 4h.")
+	}
 }
 
 function eliminarRespuestas(){
